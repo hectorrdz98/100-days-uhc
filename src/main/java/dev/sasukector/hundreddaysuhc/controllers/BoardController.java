@@ -3,6 +3,8 @@ package dev.sasukector.hundreddaysuhc.controllers;
 import dev.sasukector.hundreddaysuhc.HundredDaysUHC;
 import dev.sasukector.hundreddaysuhc.helpers.FastBoard;
 import dev.sasukector.hundreddaysuhc.helpers.ServerUtilities;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.World;
@@ -14,6 +16,7 @@ public class BoardController {
 
     private static BoardController instance = null;
     private final Map<UUID, FastBoard> boards = new HashMap<>();
+    private @Setter @Getter boolean hideDays;
 
     public static BoardController getInstance() {
         if (instance == null) {
@@ -24,6 +27,7 @@ public class BoardController {
 
     public BoardController() {
         Bukkit.getScheduler().runTaskTimer(HundredDaysUHC.getInstance(), this::updateBoards, 0L, 20L);
+        this.hideDays = false;
     }
 
     public void newPlayerBoard(Player player) {
@@ -50,7 +54,7 @@ public class BoardController {
             lines.add("Jugador: §6" + player.getName());
 
             World overworld = ServerUtilities.getOverworld();
-            if (overworld != null) {
+            if (overworld != null && !hideDays) {
                 lines.add("Día: §d" + (overworld.getFullTime() / 24000));
             }
 

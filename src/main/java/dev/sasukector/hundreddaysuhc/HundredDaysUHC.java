@@ -1,6 +1,7 @@
 package dev.sasukector.hundreddaysuhc;
 
 import dev.sasukector.hundreddaysuhc.commands.DeathsCommand;
+import dev.sasukector.hundreddaysuhc.commands.ToggleDaysCommand;
 import dev.sasukector.hundreddaysuhc.commands.PlayedCommand;
 import dev.sasukector.hundreddaysuhc.controllers.BoardController;
 import dev.sasukector.hundreddaysuhc.controllers.DeathsController;
@@ -30,6 +31,7 @@ public final class HundredDaysUHC extends JavaPlugin {
         // Register commands
         Objects.requireNonNull(HundredDaysUHC.getInstance().getCommand("deaths")).setExecutor(new DeathsCommand());
         Objects.requireNonNull(HundredDaysUHC.getInstance().getCommand("played")).setExecutor(new PlayedCommand());
+        Objects.requireNonNull(HundredDaysUHC.getInstance().getCommand("toggleDays")).setExecutor(new ToggleDaysCommand());
     }
 
     @Override

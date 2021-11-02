@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
@@ -45,6 +46,10 @@ public class SpawnEvents implements Listener {
     public void onEntityDamageBuyEntity(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             event.setCancelled(true);
+        } else if (event.getEntity() instanceof Player && event.getDamager() instanceof Projectile projectile) {
+            if (projectile.getShooter() instanceof Player) {
+                event.setCancelled(true);
+            }
         }
     }
 
